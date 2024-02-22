@@ -1,20 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-
-import 'package:ChatGPT/views/Authentication/auth.dart';
-import 'package:ChatGPT/views/home.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'firebase_options.dart';
-import 'models/constants.dart';
+import '../../models/constants.dart';
+import '../Authentication/auth.dart';
+import '../home.dart';
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
   runApp(MyApp());
 }
 
@@ -72,6 +64,7 @@ class _LandingPageState extends State<LandingPage> {
         });
       } else {
         timer.cancel();
+        // Wait for a moment and then start erasing
         Timer(Duration(seconds: 1), () {
           eraseText();
         });
@@ -87,10 +80,13 @@ class _LandingPageState extends State<LandingPage> {
         });
       } else {
         timer.cancel();
+        // Move to the next text in the list
         setState(() {
           currentIndex = (currentIndex + 1) % texts.length;
+          // Change background color randomly
           backgroundColor = getRandomColor();
         });
+        // Start typing the next text
         startTyping();
       }
     });
@@ -161,28 +157,14 @@ class _LandingPageState extends State<LandingPage> {
                             ),
                           );
                         },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                            children:[
-                              Image.asset(
-                                'assets/icons/google.png',
-                                width: 50, // Set the desired width
-                                height: 50, // Set the desired height
-                                fit: BoxFit.cover,
-                              ),
-                              SizedBox(
-                                width: 20
-                              ),
-                              Text(
-                                'Continue with Google',
-                                style: TextStyle(
-                                  color: MyColors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Nunito',
-                                ),
-                              ),
-                            ]
+                        child: Text(
+                          'Continue With Google',
+                          style: TextStyle(
+                            color: MyColors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Nunito',
+                          ),
                         ),
                       ),
                     ),
@@ -255,6 +237,7 @@ class _LandingPageState extends State<LandingPage> {
                   ],
                 )),
           )
+          // Additional widgets can be added here if needed
         ],
       ),
     );
