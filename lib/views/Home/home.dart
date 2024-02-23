@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _apiUser = const types.User(id: 'api_user_id');
   final String expiredOpenAiApiKey =
       "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";
-  final String openAiApiKey = "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";
+  final String openAiApiKey = "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";
   final TextEditingController userInputController = TextEditingController();
   String responseMessage = '';
   bool darkTheme = false;
